@@ -177,7 +177,7 @@ namespace LinqTutorials
         /// </summary>
         public static IEnumerable<Emp> Task1()
         {
-            IEnumerable<Emp> result = null;
+            IEnumerable<Emp> result = from emp in Emps where emp.Job == "Backend programmer" select emp;
             return result;
         }
 
@@ -186,7 +186,7 @@ namespace LinqTutorials
         /// </summary>
         public static IEnumerable<Emp> Task2()
         {
-            IEnumerable<Emp> result = null;
+            IEnumerable<Emp> result = Emps.Where(e => (e.Job == "Frontend programmer" && e.Salary > 1000)).OrderByDescending(e => e.Ename);
             return result;
         }
 
@@ -196,7 +196,7 @@ namespace LinqTutorials
         /// </summary>
         public static int Task3()
         {
-            int result = 0;
+            int result = Emps.Max(e => e.Salary);
             return result;
         }
 
@@ -214,7 +214,11 @@ namespace LinqTutorials
         /// </summary>
         public static IEnumerable<object> Task5()
         {
-            IEnumerable<object> result = null;
+            IEnumerable<object> result = Emps.Select(emp => new
+            {
+                Nazwisko = emp.Ename,
+                Praca = emp.Job
+            });
             return result;
         }
 
@@ -225,7 +229,11 @@ namespace LinqTutorials
         /// </summary>
         public static IEnumerable<object> Task6()
         {
-            IEnumerable<object> result = null;
+            IEnumerable<object> result = Emps.Join(
+                Depts,
+                emp => emp.Deptno,
+                dept => dept.Deptno,
+                (emp, dept) => new { Emp = emp, Dept = dept });
             return result;
         }
 
