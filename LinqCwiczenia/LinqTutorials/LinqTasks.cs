@@ -186,7 +186,7 @@ namespace LinqTutorials
         /// </summary>
         public static IEnumerable<Emp> Task2()
         {
-            IEnumerable<Emp> result = Emps.Where(e => (e.Job == "Frontend programmer" && e.Salary > 1000)).OrderByDescending(e => e.Ename);
+            IEnumerable<Emp> result = Emps.Where(e => (e.Job == "Frontend programmer" && e.Salary > 1000)).OrderByDescending(e => e.Ename).ToList();
             return result;
         }
 
@@ -252,7 +252,7 @@ namespace LinqTutorials
         /// </summary>
         public static bool Task8()
         {
-            bool result = false;
+            bool result = Emps.Where(e => e.Job == "Backend programmer").Any();
             return result;
         }
 
